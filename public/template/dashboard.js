@@ -26,40 +26,35 @@ export const dashboardTemplate = `
             <h1 class="ml-3">Welcome...</h1>
         </div>
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Bronzwik's Home
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+            <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   
+                </button>
         </div>
     </div>
     
     <div class="row mt-4">
-        <div class="col-md-3">
-            <div class="dashboard-card">
-                <h5>My Open Deals</h5>
-                <p>0</p>
-            </div>
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <h5>My Leads</h5>
+            <p id="leadsCount">0</p>
         </div>
-        <div class="col-md-3">
-            <div class="dashboard-card">
-                <h5>My Untouched Deals</h5>
-                <p>0</p>
-            </div>
+    </div>
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <h5>My Projects</h5>
+            <p id="projectsCount">0</p>
         </div>
-        <div class="col-md-3">
-            <div class="dashboard-card">
-                <h5>My Calls Today</h5>
-                <p>0</p>
-            </div>
+    </div>
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <h5>My Tickets</h5>
+            <p id="ticketsCount">0</p>
         </div>
-        <div class="col-md-3">
-            <div class="dashboard-card">
-                <h5>My Leads</h5>
-                <p>0</p>
+    </div>
+    <div class="col-md-3">
+        <div class="dashboard-card">
+            <h5>My Team</h5>
+            <p id="teamsCount">0</p>
             </div>
         </div>
     </div>
@@ -73,66 +68,26 @@ export const dashboardTemplate = `
   <div class="dashboard" id="dasboard">
     <div class="container mt-5">
       <h2>Open Tickets</h2>
-      <div class="d-flex mb-3">
-          
-          <a href="#" class="ml-auto nav-feature"><i class="fas fa-filter"></i> Filter</a>
-          <a href="#" class="nav-feature"><i class="fas fa-sort"></i> Sort</a>
-          <a href="#" class="nav-feature"><i class="fas fa-search"></i></a>
+      <div class="d-flex mb-3" id="ticket-filter">
+          <a href="#" class="ml-auto nav-feature"></a>
+          <a href="#" class="nav-feature" onclick="sortTable()"><i class="fas fa-sort"></i> Sort</a>
+          <a href="#" class="nav-feature" onclick="searchTable()"><i class="fas fa-search"></i> Search</a>
       </div>
-      <table class="table table-bordered">
-          <thead class="thead-light">
-          <tr>
-              <th>Subject</th>
-              <th>Due Date</th>
-              <th>Status</th>
-              <th>Priority</th>
-              <th>Related To</th>
-              <th>Contact Name</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-              <td>Register for upcoming CRM Webinars</td>
-              <td>14/07/2024</td>
-              <td>Not Started</td>
-              <td>Low</td>
-              <td><i class="fas fa-building"></i> King (Sample)</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Kris Marrier"> Kris Marrier (Sample)</td>
-          </tr>
-          <tr>
-              <td>Refer CRM Videos</td>
-              <td>16/07/2024</td>
-              <td>In Progress</td>
-              <td>Normal</td>
-              <td><i class="fas fa-briefcase"></i> Morlong Associates</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Mitsue Tollner"> Mitsue Tollner (Sample)</td>
-          </tr>
-          <tr>
-              <td>Competitor Comparison Document</td>
-              <td>12/07/2024</td>
-              <td>Not Started</td>
-              <td>Highest</td>
-              <td><i class="fas fa-print"></i> Feltz Printing Service</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Capla Paprocki"> Capla Paprocki (Sample)</td>
-          </tr>
-          <tr>
-              <td>Get Approval from Manager</td>
-              <td>13/07/2024</td>
-              <td>Not Started</td>
-              <td>Low</td>
-              <td><i class="fas fa-user"></i> Chapman</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Simon Morasca"> Simon Morasca (Sample)</td>
-          </tr>
-          <tr>
-              <td>Get Approval from Manager</td>
-              <td>15/07/2024</td>
-              <td>In Progress</td>
-              <td>Normal</td>
-              <td><i class="fas fa-industry"></i> Commercial Press</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Leota Dilliard"> Leota Dilliard (Sample)</td>
-          </tr>
-          </tbody>
-      </table>
+     <table id="myTicket" class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Assigned To</th>
+            <th>Project ID</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
       <div class="text-right">
           <small>1 to 10</small>
       </div>
@@ -143,67 +98,26 @@ export const dashboardTemplate = `
   
   <div class="dashboard" id="dasboard">
     <div class="container mt-5">
-      <h2>Resent Activity</h2>
-      <div class="d-flex mb-3">
-          
-          <a href="#" class="ml-auto nav-feature"><i class="fas fa-filter"></i> Filter</a>
-          <a href="#" class="nav-feature"><i class="fas fa-sort"></i> Sort</a>
-          <a href="#" class="nav-feature"><i class="fas fa-search"></i></a>
+      <h2>Resent Projects</h2>
+      <div class="d-flex mb-3" id="project-filter" >
+          <a href="#" class="ml-auto nav-feature"></a>
+          <a href="#" class="nav-feature" onclick="sortProjectTable()"><i class="fas fa-sort"></i> Sort</a>
+  <a href="#" class="nav-feature" onclick="searchProjectTable()"><i class="fas fa-search"></i> Search</a>
       </div>
-      <table class="table table-bordered">
-          <thead class="thead-light">
-          <tr>
-              <th>Subject</th>
-              <th>Due Date</th>
-              <th>Status</th>
-              <th>Priority</th>
-              <th>Related To</th>
-              <th>Contact Name</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-              <td>Register for upcoming CRM Webinars</td>
-              <td>14/07/2024</td>
-              <td>Not Started</td>
-              <td>Low</td>
-              <td><i class="fas fa-building"></i> King (Sample)</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Kris Marrier"> Kris Marrier (Sample)</td>
-          </tr>
-          <tr>
-              <td>Refer CRM Videos</td>
-              <td>16/07/2024</td>
-              <td>In Progress</td>
-              <td>Normal</td>
-              <td><i class="fas fa-briefcase"></i> Morlong Associates</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Mitsue Tollner"> Mitsue Tollner (Sample)</td>
-          </tr>
-          <tr>
-              <td>Competitor Comparison Document</td>
-              <td>12/07/2024</td>
-              <td>Not Started</td>
-              <td>Highest</td>
-              <td><i class="fas fa-print"></i> Feltz Printing Service</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Capla Paprocki"> Capla Paprocki (Sample)</td>
-          </tr>
-          <tr>
-              <td>Get Approval from Manager</td>
-              <td>13/07/2024</td>
-              <td>Not Started</td>
-              <td>Low</td>
-              <td><i class="fas fa-user"></i> Chapman</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Simon Morasca"> Simon Morasca (Sample)</td>
-          </tr>
-          <tr>
-              <td>Get Approval from Manager</td>
-              <td>15/07/2024</td>
-              <td>In Progress</td>
-              <td>Normal</td>
-              <td><i class="fas fa-industry"></i> Commercial Press</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Leota Dilliard"> Leota Dilliard (Sample)</td>
-          </tr>
-          </tbody>
-      </table>
+     <table id="projectTable" class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Team ID</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
       <div class="text-right">
           <small>1 to 10</small>
       </div>
@@ -213,65 +127,22 @@ export const dashboardTemplate = `
 
   <div class="dashboard" id="dasboard">
     <div class="container mt-5">
-      <h2>Closed Tickets</h2>
-      <div class="d-flex mb-3">
-          
-          <a href="#" class="ml-auto nav-feature"><i class="fas fa-filter"></i> Filter</a>
-          <a href="#" class="nav-feature"><i class="fas fa-sort"></i> Sort</a>
-          <a href="#" class="nav-feature"><i class="fas fa-search"></i></a>
+      <h2>My Leads</h2>
+      <div class="d-flex mb-3" id="leads-filter" >       
+          <a href="#" class="ml-auto nav-feature"></a>
+          <a href="#" class="nav-feature" onclick="sortLeadsTable()"><i class="fas fa-sort"></i> Sort</a>
+          <a href="#" class="nav-feature" onclick="searchLeadsTable()"><i class="fas fa-search"></i> Search</a>
       </div>
-      <table class="table table-bordered">
+      <table  id="mytickets" class="table table-bordered">
           <thead class="thead-light">
           <tr>
-              <th>Subject</th>
-              <th>Due Date</th>
-              <th>Status</th>
-              <th>Priority</th>
-              <th>Related To</th>
-              <th>Contact Name</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Team ID</th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-              <td>Register for upcoming CRM Webinars</td>
-              <td>14/07/2024</td>
-              <td>Not Started</td>
-              <td>Low</td>
-              <td><i class="fas fa-building"></i> King (Sample)</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Kris Marrier"> Kris Marrier (Sample)</td>
-          </tr>
-          <tr>
-              <td>Refer CRM Videos</td>
-              <td>16/07/2024</td>
-              <td>In Progress</td>
-              <td>Normal</td>
-              <td><i class="fas fa-briefcase"></i> Morlong Associates</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Mitsue Tollner"> Mitsue Tollner (Sample)</td>
-          </tr>
-          <tr>
-              <td>Competitor Comparison Document</td>
-              <td>12/07/2024</td>
-              <td>Not Started</td>
-              <td>Highest</td>
-              <td><i class="fas fa-print"></i> Feltz Printing Service</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Capla Paprocki"> Capla Paprocki (Sample)</td>
-          </tr>
-          <tr>
-              <td>Get Approval from Manager</td>
-              <td>13/07/2024</td>
-              <td>Not Started</td>
-              <td>Low</td>
-              <td><i class="fas fa-user"></i> Chapman</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Simon Morasca"> Simon Morasca (Sample)</td>
-          </tr>
-          <tr>
-              <td>Get Approval from Manager</td>
-              <td>15/07/2024</td>
-              <td>In Progress</td>
-              <td>Normal</td>
-              <td><i class="fas fa-industry"></i> Commercial Press</td>
-              <td><img src="https://via.placeholder.com/30" class="rounded-circle" alt="Leota Dilliard"> Leota Dilliard (Sample)</td>
-          </tr>
+             
           </tbody>
       </table>
       <div class="text-right">

@@ -22,6 +22,25 @@
 <link href="./beauty/bootstrap-dg-app/bootstrap.min.css" rel="stylesheet">
 <link href="./beauty/bootstrap-dg-app" rel="stylesheet">
 <!-- Inside your HTML file, preferably in a <style> tag or linked CSS file -->
+
+  <style>
+    /* Additional styling for dropdown menu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 80px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    .dropdown-menu a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-menu a:hover {background-color: #f1f1f1}
+  </style>
   <style>
     /* Adjust padding if needed */
     .table th,
@@ -33,6 +52,9 @@
     /* Optional: Increase row height for better readability */
     .table tbody tr {
         height: 3rem;
+    }
+    #TeamListContainer h2{
+      margin-left: 25px;
     }
 </style>
 
@@ -172,6 +194,12 @@
   #dropdown-clp li a{
     margin-top: 5px;
   }
+  #auth-check{
+    display: none;
+  }
+  .container2 {
+    display: none;
+  }
     </style>
 
     
@@ -183,7 +211,55 @@
   </head>
 <body>
 
-   <div class="container-fluid">
+  <div id="register" class="container container2">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="text-center">Register</h2>
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+        <a id="signin" href="#">Sign in</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="login-user" class="container container2">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="text-center">Login</h2>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <a id="new-user" href="#">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" id="auth-check">
     <div class="row">
       <div class="sidebar col-md-3 col-lg-2 p-0 ">
         <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
@@ -193,7 +269,7 @@
           <section id="sidebar-dg-app">
             <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
               <symbol id="bootstrap" viewBox="0 0 118 94">
-                <title>Bootstrap</title>
+               
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
               </symbol>
               <symbol id="home" viewBox="0 0 16 16">
@@ -237,13 +313,13 @@
                   </ul>
                   <ul class="nav nav-pills flex-column mb-auto">
                     <li>
-                      <a href="#" class="nav-link link-body-emphasis" data-target="dashboard">
+                      <a href="#" id="dashboard" class="nav-link link-body-emphasis">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
                         Dashboard
                       </a>
                     </li>
                     <li>
-                      <a href="#" class="nav-link link-body-emphasis" data-target="openTickets">
+                      <a href="#" id="openTickets" class="nav-link link-body-emphasis" data-target="openTickets">
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
                         Open Tickets
                       </a>
@@ -260,19 +336,19 @@
                         Recent activity
                       </a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a href="#" class="nav-link link-body-emphasis">
                         <i class="bi bi-collection"></i>
                         Draft
                       </a>
-                    </li>
+                    </li> -->
                     <li>
                       <a href="#" class="nav-link link-body-emphasis">
                         <i class="bi bi-inbox"></i>
                         Inbox
                       </a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a href="#" class="nav-link link-body-emphasis">
                         <i class="bi bi-collection"></i>
                         My Collections
@@ -283,7 +359,7 @@
                         <i class="bi bi-bookmark-dash"></i>
                         My Tags
                       </a>
-                    </li>
+                    </li> -->
                     <li>
                       <a href="#" class="nav-link link-body-emphasis" data-target="organization" id="collectionsLink">
                         <i class="bi bi-building"></i>
@@ -337,7 +413,7 @@
                           <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded"> Subscriptions
                             </a></li>
                           <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Integrated Services</a></li>
-                          <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                          <li><a id="signout" href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
                         </ul>
                       </div>
                     </li>
@@ -353,13 +429,9 @@
           <input id="search"  type="text" class="form-control" placeholder="Search...">
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-              <button  type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+              <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+              <button  type="button" class="btn btn-sm btn-outline-secondary" id="exportData" >Export</button> -->
             </div>
-            <button id="export" type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-              <svg class="bi"><use xlink:href="#calendar3"/></svg>
-              This week
-            </button>
           </div>
         </div>
 
@@ -373,1201 +445,311 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const ticketsLink = document.getElementById('tickets');
-        ticketsLink.addEventListener('click', async (event) => {
-            event.preventDefault(); // Prevent default link behavior
-            await fetchAndDisplayTickets(); // Fetch tickets when link is clicked
-        });
+    document.addEventListener('DOMContentLoaded', function () {
+      const registerForm = document.getElementById('register');
+      const loginForm = document.getElementById('login-user');
+      const signinLink = document.getElementById('signin');
+      const newuserLink = document.getElementById('new-user');
+
+      signinLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+      });
+
+      newuserLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+      });
+
+      // Initially display the register form
+      registerForm.style.display = 'block';
     });
+  </script>
 
-    async function fetchAndDisplayTickets() {
-      try {
-          const response = await fetch('/tickets'); // Fetch data from the backend
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          const tickets = await response.json(); // Parse JSON response
-  
-          const ticketListContainer = document.getElementById('ticketList');
-          ticketListContainer.innerHTML = ''; // Clear any existing table rows
-  
-          // Iterate through the tickets and create table rows
-          tickets.forEach(ticket => {
-              const row = document.createElement('tr');
-  
-              // Create table cells for each ticket property
-              const titleCell = document.createElement('td');
-              titleCell.textContent = ticket.title;
-              row.appendChild(titleCell);
-  
-              const descriptionCell = document.createElement('td');
-              descriptionCell.textContent = ticket.description;
-              row.appendChild(descriptionCell);
-  
-              const statusCell = document.createElement('td');
-              statusCell.textContent = ticket.status;
-              row.appendChild(statusCell);
-  
-              const priorityCell = document.createElement('td');
-              priorityCell.textContent = ticket.priority;
-              row.appendChild(priorityCell);
-  
-              const assignedToCell = document.createElement('td');
-              assignedToCell.textContent = ticket.assignedTo;
-              row.appendChild(assignedToCell);
-  
-              const projectIdCell = document.createElement('td');
-              projectIdCell.textContent = ticket.projectId;
-              row.appendChild(projectIdCell);
-  
-              // Create edit button
-              const editButtonCell = document.createElement('td');
-              const editButton = document.createElement('button');
-              editButton.textContent = 'Edit';
-              editButton.classList.add('btn', 'btn-primary', 'btn-sm');
-              editButton.onclick = () => editTicket(ticket._id);
-              editButtonCell.appendChild(editButton);
-              row.appendChild(editButtonCell);
-  
-              // Create delete button
-              const deleteButtonCell = document.createElement('td');
-              const deleteButton = document.createElement('button');
-              deleteButton.textContent = 'Delete';
-              deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-              deleteButton.onclick = () => deleteTicket(ticket._id);
-              deleteButtonCell.appendChild(deleteButton);
-              row.appendChild(deleteButtonCell);
-  
-              // Append row to the table body
-              ticketListContainer.appendChild(row);
-          });
-      } catch (error) {
-          console.error('There has been a problem with your fetch operation:', error);
-      }
-  }
-  
-
-    async function editTicket(ticketId) {
-        try {
-            const response = await fetch(`/tickets/${ticketId}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch ticket details');
-            }
-            const ticket = await response.json();
-
-            const formContainer = document.createElement('div');
-            formContainer.classList.add('container', 'mt-5');
-
-            const formTitle = document.createElement('h2');
-            formTitle.textContent = 'Edit Ticket';
-
-            const form = document.createElement('form');
-            form.id = 'editTicketForm';
-
-            // Title input field
-            const titleLabel = document.createElement('label');
-            titleLabel.setAttribute('for', 'editTicketTitle');
-            titleLabel.textContent = 'Title';
-
-            const titleInput = document.createElement('input');
-            titleInput.type = 'text';
-            titleInput.classList.add('form-control');
-            titleInput.id = 'editTicketTitle';
-            titleInput.value = ticket.title;
-            titleInput.required = true;
-
-            // Description input field
-            const descriptionLabel = document.createElement('label');
-            descriptionLabel.setAttribute('for', 'editTicketDescription');
-            descriptionLabel.textContent = 'Description';
-
-            const descriptionInput = document.createElement('textarea');
-            descriptionInput.classList.add('form-control');
-            descriptionInput.id = 'editTicketDescription';
-            descriptionInput.textContent = ticket.description;
-            descriptionInput.required = true;
-
-            // Status input field
-            const statusLabel = document.createElement('label');
-            statusLabel.setAttribute('for', 'editTicketStatus');
-            statusLabel.textContent = 'Status';
-
-            const statusInput = document.createElement('select');
-            statusInput.classList.add('form-control');
-            statusInput.id = 'editTicketStatus';
-
-            const statusOptions = ['open', 'in progress', 'closed'];
-            statusOptions.forEach(option => {
-                const optionElement = document.createElement('option');
-                optionElement.value = option;
-                optionElement.textContent = option;
-                if (option === ticket.status) {
-                    optionElement.selected = true;
-                }
-                statusInput.appendChild(optionElement);
-            });
-
-            // Priority input field
-            const priorityLabel = document.createElement('label');
-            priorityLabel.setAttribute('for', 'editTicketPriority');
-            priorityLabel.textContent = 'Priority';
-
-            const priorityInput = document.createElement('select');
-            priorityInput.classList.add('form-control');
-            priorityInput.id = 'editTicketPriority';
-
-            const priorityOptions = ['low', 'medium', 'high'];
-            priorityOptions.forEach(option => {
-                const optionElement = document.createElement('option');
-                optionElement.value = option;
-                optionElement.textContent = option;
-                if (option === ticket.priority) {
-                    optionElement.selected = true;
-                }
-                priorityInput.appendChild(optionElement);
-            });
-
-            // Assigned To input field
-            const assignedToLabel = document.createElement('label');
-            assignedToLabel.setAttribute('for', 'editTicketAssignedTo');
-            assignedToLabel.textContent = 'Assigned To';
-
-            const assignedToInput = document.createElement('input');
-            assignedToInput.type = 'text';
-            assignedToInput.classList.add('form-control');
-            assignedToInput.id = 'editTicketAssignedTo';
-            assignedToInput.value = ticket.assignedTo;
-
-            // Project ID input field
-            const projectIdLabel = document.createElement('label');
-            projectIdLabel.setAttribute('for', 'editTicketProjectId');
-            projectIdLabel.textContent = 'Project ID';
-
-            const projectIdInput = document.createElement('input');
-            projectIdInput.type = 'text';
-            projectIdInput.classList.add('form-control');
-            projectIdInput.id = 'editTicketProjectId';
-            projectIdInput.value = ticket.projectId;
-            projectIdInput.required = true;
-
-            // Submit button
-            const submitButton = document.createElement('button');
-            submitButton.type = 'submit';
-            submitButton.classList.add('btn', 'btn-primary', 'me-2');
-            submitButton.textContent = 'Save';
-
-            // Cancel button
-            const cancelButton = document.createElement('button');
-            cancelButton.type = 'button';
-            cancelButton.classList.add('btn', 'btn-secondary');
-            cancelButton.textContent = 'Cancel';
-            cancelButton.addEventListener('click', () => {
-                formContainer.remove(); // Remove the form on cancel
-                reopenTicketList();
-            });
-
-            // Append elements to form
-            form.append(
-                titleLabel, titleInput,
-                descriptionLabel, descriptionInput,
-                statusLabel, statusInput,
-                priorityLabel, priorityInput,
-                assignedToLabel, assignedToInput,
-                projectIdLabel, projectIdInput,
-                submitButton, cancelButton
-            );
-
-            // Append form elements to container
-            formContainer.append(formTitle, form);
-
-            // Append form container to the specified div
-            const userContentDiv = document.getElementById('dg-app-user-content');
-            userContentDiv.innerHTML = ''; // Clear existing content (if any)
-            userContentDiv.appendChild(formContainer);
-
-            // Handle form submission
-            form.addEventListener('submit', async (event) => {
-                event.preventDefault();
-
-                const updatedTicket = {
-                    title: titleInput.value,
-                    description: descriptionInput.value,
-                    status: statusInput.value,
-                    priority: priorityInput.value,
-                    assignedTo: assignedToInput.value,
-                    projectId: projectIdInput.value
-                };
-
-                try {
-                    const updateResponse = await fetch(`/tickets/${ticketId}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(updatedTicket)
-                    });
-
-                    if (!updateResponse.ok) {
-                        throw new Error('Failed to update ticket');
-                    }
-
-                    const updatedData = await updateResponse.json();
-                    console.log('Ticket updated:', updatedData);
-
-                    // Remove the form after successful update
-                    formContainer.remove();
-                    reopenTicketList();
-                    // Optionally, refresh ticket list or perform other actions
-                    await fetchAndDisplayTickets(); // Example function to fetch tickets list
-                } catch (error) {
-                    console.error('Error updating ticket:', error);
-                    // Handle error display or logging
-                }
-            });
-
-        } catch (error) {
-            console.error('Error fetching ticket details:', error);
-            // Handle error display or logging
-        }
-    }
-
-    async function deleteTicket(ticketId, listItem) {
-        if (!confirm("Are you sure you want to delete this ticket?")) {
-            return;
-        }
-
-        try {
-            const response = await fetch(`/tickets/${ticketId}`, {
-                method: 'DELETE'
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result = await response.json();
-            console.log(result.message);
-            // Remove the list item from the DOM
-            listItem.remove();
-        } catch (error) {
-            console.error('There has been a problem with your fetch operation:', error);
-        }
-    }
-
-    // Function to open the "My Tickets" link
-    function reopenTicketList() {
-        const ticketsLink = document.getElementById('tickets');
-        ticketsLink.click(); // Trigger the click event to reopen the link
-    }
-</script>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const leadsLink = document.getElementById('leads');
-    leadsLink.addEventListener('click', async (event) => {
-        event.preventDefault(); // Prevent default link behavior
-        await fetchAndDisplayLeads(); // Fetch leads when link is clicked
-    });
-    });
-    
-    async function fetchAndDisplayLeads() {
-      try {
-          const response = await fetch('/leads'); // Fetch data from the backend
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          const leads = await response.json(); // Parse JSON response
-  
-          const leadListContainer = document.getElementById('leadList');
-          leadListContainer.innerHTML = ''; // Clear any existing table rows
-  
-          // Iterate through the leads and create table rows
-          leads.forEach(lead => {
-              const row = document.createElement('tr');
-  
-              // Name column
-              const nameCell = document.createElement('td');
-              nameCell.textContent = lead.name;
-              row.appendChild(nameCell);
-  
-              // Email column
-              const emailCell = document.createElement('td');
-              emailCell.textContent = lead.email;
-              row.appendChild(emailCell);
-  
-              // Team ID column
-              const teamIdCell = document.createElement('td');
-              teamIdCell.textContent = lead.teamId;
-              row.appendChild(teamIdCell);
-  
-              // Actions column with Edit and Delete buttons
-              const actionsCell = document.createElement('td');
-  
-              // Create edit button
-              const editButton = document.createElement('button');
-              editButton.textContent = 'Edit';
-              editButton.classList.add('btn', 'btn-primary', 'btn-sm', 'me-2', 'btn-sm');
-              editButton.onclick = () => editLead(lead._id);
-              actionsCell.appendChild(editButton);
-  
-              // Create delete button
-              const deleteButton = document.createElement('button');
-              deleteButton.textContent = 'Delete';
-              deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-              deleteButton.onclick = () => deleteLead(lead._id, row);
-              actionsCell.appendChild(deleteButton);
-  
-              row.appendChild(actionsCell);
-  
-              leadListContainer.appendChild(row);
-          });
-      } catch (error) {
-          console.error('There has been a problem with your fetch operation:', error);
-      }
-  }
-  
-
-  async function editLead(leadId) {
-    try {
-        const response = await fetch(`/leads/${leadId}`);
-        if (!response.ok) {
-            throw new Error('Failed to fetch lead details');
-        }
-        const lead = await response.json();
-
-        const formContainer = document.createElement('div');
-        formContainer.classList.add('container', 'mt-5');
-
-        const formTitle = document.createElement('h2');
-        formTitle.textContent = 'Edit Lead';
-
-        const form = document.createElement('form');
-        form.id = 'editLeadForm';
-
-        // Name input field
-        const nameLabel = document.createElement('label');
-        nameLabel.setAttribute('for', 'editLeadName');
-        nameLabel.textContent = 'Name';
-
-        const nameInput = document.createElement('input');
-        nameInput.type = 'text';
-        nameInput.classList.add('form-control');
-        nameInput.id = 'editLeadName';
-        nameInput.value = lead.name;
-        nameInput.required = true;
-
-        // Email input field
-        const emailLabel = document.createElement('label');
-        emailLabel.setAttribute('for', 'editLeadEmail');
-        emailLabel.textContent = 'Email';
-
-        const emailInput = document.createElement('input');
-        emailInput.type = 'email';
-        emailInput.classList.add('form-control');
-        emailInput.id = 'editLeadEmail';
-        emailInput.value = lead.email;
-        emailInput.required = true;
-
-        // Team ID input field
-        const teamIdLabel = document.createElement('label');
-        teamIdLabel.setAttribute('for', 'editLeadTeamId');
-        teamIdLabel.textContent = 'Team ID';
-
-        const teamIdInput = document.createElement('input');
-        teamIdInput.type = 'text';
-        teamIdInput.classList.add('form-control');
-        teamIdInput.id = 'editLeadTeamId';
-        teamIdInput.value = lead.teamId;
-        teamIdInput.required = true;
-
-        // Submit button
-        const submitButton = document.createElement('button');
-        submitButton.type = 'submit';
-        submitButton.classList.add('btn', 'btn-primary', 'me-2');
-        submitButton.textContent = 'Save';
-
-        // Cancel button
-        const cancelButton = document.createElement('button');
-        cancelButton.type = 'button';
-        cancelButton.classList.add('btn', 'btn-secondary');
-        cancelButton.textContent = 'Cancel';
-        cancelButton.addEventListener('click', () => {
-            formContainer.remove(); // Remove the form on cancel
-            reopenLeadList();
-        });
-
-        // Append elements to form
-        form.append(
-            nameLabel, nameInput,
-            emailLabel, emailInput,
-            teamIdLabel, teamIdInput,
-            submitButton, cancelButton
-        );
-
-        // Append form elements to container
-        formContainer.append(formTitle, form);
-
-        // Append form container to the specified div
-        const userContentDiv = document.getElementById('dg-app-user-content');
-        userContentDiv.innerHTML = ''; // Clear existing content (if any)
-        userContentDiv.appendChild(formContainer);
-
-        // Handle form submission
-        form.addEventListener('submit', async (event) => {
-            event.preventDefault();
-
-            const updatedLead = {
-                name: nameInput.value,
-                email: emailInput.value,
-                teamId: teamIdInput.value
-            };
-
-            try {
-                const updateResponse = await fetch(`/leads/${leadId}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(updatedLead)
-                });
-
-                if (!updateResponse.ok) {
-                    throw new Error('Failed to update lead');
-                }
-
-                const updatedData = await updateResponse.json();
-                console.log('Lead updated:', updatedData);
-
-                // Remove the form after successful update
-                formContainer.remove();
-                reopenLeadList();
-                // Optionally, refresh lead list or perform other actions
-                await fetchAndDisplayLeads(); // Example function to fetch leads list
-            } catch (error) {
-                console.error('Error updating lead:', error);
-                // Handle error display or logging
-            }
-        });
-
-    } catch (error) {
-        console.error('Error fetching lead details:', error);
-        // Handle error display or logging
-    }
-}
-
-async function deleteLead(leadId, listItem) {
-    if (!confirm("Are you sure you want to delete this lead?")) {
-        return;
-    }
-
-    try {
-        const response = await fetch(`/leads/${leadId}`, {
-            method: 'DELETE'
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const result = await response.json();
-        console.log(result.message);
-        // Remove the list item from the DOM
-        listItem.remove();
-    } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
-    }
-}
- // Function to open the "My Leads" link
- function reopenLeadList() {
-  const leadsLink = document.getElementById('leads');
-  leadsLink.click(); // Trigger the click event to reopen the link
-}
-
-</script>
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
+    async function checkAuthentication() {
+        const db = await idb.openDB('userCredentials', 1, {
+            upgrade(db) {
+                db.createObjectStore('credentials', { keyPath: 'email' });
+            }
+        });
+
+        const transaction = db.transaction('credentials', 'readonly');
+        const store = transaction.objectStore('credentials');
+        const savedCredentials = await store.getAll();
+
+        console.log('Saved credentials:', savedCredentials); // Add logging here
+
+        if (savedCredentials.length > 0) {
+            // Hide registration and login forms, show authentication check
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('login-user').style.display = 'none';
+            document.getElementById('auth-check').style.display = 'block';
+
+            // Set the email in the dropdown button
+            document.getElementById('dropdownMenuButton').textContent = savedCredentials[0].email;
+        } else {
+            // Show login form
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('login-user').style.display = 'block';
+            document.getElementById('auth-check').style.display = 'none';
+        }
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const teamLink = document.getElementById('team');
-      teamLink.addEventListener('click', async (event) => {
-          event.preventDefault(); // Prevent default link behavior
-          await fetchOrganizations(); // Fetch organizations when link is clicked
-      });
-  });
-  
-  async function fetchAndDisplayTeams() {
-    try {
-        const response = await fetch('/teams'); // Fetch data from the backend
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const teams = await response.json(); // Parse JSON response
+        checkAuthentication();
+    });
 
-        const teamList = document.getElementById('TeamList');
-        teamList.innerHTML = ''; // Clear any existing content
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
 
-        // Create table
-        const table = document.createElement('table');
-        table.classList.add('table', 'table-bordered');
-
-        // Create table header
-        const thead = document.createElement('thead');
-        thead.innerHTML = `
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Lead ID</th>
-                <th>Actions</th>
-            </tr>
-        `;
-        table.appendChild(thead);
-
-        // Create table body
-        const tbody = document.createElement('tbody');
-        teams.forEach(team => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${team.name}</td>
-                <td>${team.description}</td>
-                <td>${team.leadId}</td>
-                <td>
-                    <button class="btn btn-primary me-2 btn-sm" onclick="editTeam('${team._id}')">Edit</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteTeam('${team._id}', this.parentElement.parentElement)">Delete</button>
-                </td>
-            `;
-            tbody.appendChild(row);
+        const response = await fetch('/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         });
-        table.appendChild(tbody);
 
-        // Append table to teamList container
-        teamList.appendChild(table);
-    } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
-    }
-}
+        const result = await response.json();
+        alert(result.message);
 
+        if (response.status === 201) {
+            // Show login form after successful registration
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('login-user').style.display = 'block';
+            document.getElementById('auth-check').style.display = 'none';
+        }
+    });
 
-    async function editTeam(teamId) {
-        try {
-            const response = await fetch(`/teams/${teamId}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch team details');
-            }
-            const team = await response.json();
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
 
-            const formContainer = document.createElement('div');
-            formContainer.classList.add('container', 'mt-5');
+        const response = await fetch('/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-            const formTitle = document.createElement('h2');
-            formTitle.textContent = 'Edit Team';
+        const result = await response.json();
 
-            const form = document.createElement('form');
-            form.id = 'editTeamForm';
-
-            // Name input field
-            const nameLabel = document.createElement('label');
-            nameLabel.setAttribute('for', 'editName');
-            nameLabel.textContent = 'Name';
-
-            const nameInput = document.createElement('input');
-            nameInput.type = 'text';
-            nameInput.classList.add('form-control');
-            nameInput.id = 'editName';
-            nameInput.value = team.name;
-            nameInput.required = true;
-
-            // Description input field
-            const descriptionLabel = document.createElement('label');
-            descriptionLabel.setAttribute('for', 'editDescription');
-            descriptionLabel.textContent = 'Description';
-
-            const descriptionInput = document.createElement('textarea');
-            descriptionInput.classList.add('form-control');
-            descriptionInput.id = 'editDescription';
-            descriptionInput.textContent = team.description;
-            descriptionInput.required = true;
-
-            // Lead ID input field
-            const leadIdLabel = document.createElement('label');
-            leadIdLabel.setAttribute('for', 'editLeadId');
-            leadIdLabel.textContent = 'Lead ID';
-
-            const leadIdInput = document.createElement('input');
-            leadIdInput.type = 'text';
-            leadIdInput.classList.add('form-control');
-            leadIdInput.id = 'editLeadId';
-            leadIdInput.value = team.leadId;
-            leadIdInput.required = true;
-
-            // Submit button
-            const submitButton = document.createElement('button');
-            submitButton.type = 'submit';
-            submitButton.classList.add('btn', 'btn-primary', 'me-2');
-            submitButton.textContent = 'Save';
-
-            // Cancel button
-            const cancelButton = document.createElement('button');
-            cancelButton.type = 'button';
-            cancelButton.classList.add('btn', 'btn-secondary');
-            cancelButton.textContent = 'Cancel';
-            cancelButton.addEventListener('click', () => {
-                formContainer.remove(); // Remove the form on cancel
-                reopenTeamList();
-            });
-
-            // Append elements to form
-            form.append(
-                nameLabel, nameInput,
-                descriptionLabel, descriptionInput,
-                leadIdLabel, leadIdInput,
-                submitButton, cancelButton
-            );
-
-            // Append form elements to container
-            formContainer.append(formTitle, form);
-
-            // Append form container to the specified div
-            const userContentDiv = document.getElementById('dg-app-user-content');
-            userContentDiv.innerHTML = ''; // Clear existing content (if any)
-            userContentDiv.appendChild(formContainer);
-
-            // Handle form submission
-            form.addEventListener('submit', async (event) => {
-                event.preventDefault();
-
-                const updatedTeam = {
-                    name: nameInput.value,
-                    description: descriptionInput.value,
-                    leadId: leadIdInput.value
-                };
-
-                try {
-                    const updateResponse = await fetch(`/teams/${teamId}`, {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(updatedTeam)
-                    });
-
-                    if (!updateResponse.ok) {
-                        throw new Error('Failed to update team');
-                    }
-
-                    const updatedData = await updateResponse.json();
-                    console.log('Team updated:', updatedData);
-
-                    // Remove the form after successful update
-                    formContainer.remove();
-                    reopenTeamList();
-                    // Optionally, refresh team list or perform other actions
-                    await fetchAndDisplayTeams(); // Example function to fetch teams list
-                } catch (error) {
-                    console.error('Error updating team:', error);
-                    // Handle error display or logging
+        if (response.status === 200) {
+            // Save email and hashed password to IndexedDB
+            const db = await idb.openDB('userCredentials', 1, {
+                upgrade(db) {
+                    db.createObjectStore('credentials', { keyPath: 'email' });
                 }
             });
 
-        } catch (error) {
-            console.error('Error fetching team details:', error);
-            // Handle error display or logging
-        }
-    }
+            const hashedPassword = result.hashedPassword; // Assuming server sends hashedPassword in response
 
-    async function deleteTeam(teamId, listItem) {
-        if (!confirm("Are you sure you want to delete this team?")) {
-            return;
-        }
+            await db.put('credentials', { email: data.email, hashedPassword });
+            console.log('Email and hashed password saved in IndexedDB');
 
-        try {
-            const response = await fetch(`/teams/${teamId}`, {
-                method: 'DELETE'
-            });
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const result = await response.json();
-            console.log(result.message);
-            // Remove the list item from the DOM
-            listItem.remove();
-        } catch (error) {
-            console.error('There has been a problem with your fetch operation:', error);
-        }
-    }
+            // Hide registration and login forms, show authentication check
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('login-user').style.display = 'none';
+            document.getElementById('auth-check').style.display = 'block';
 
-    // Function to open the "My Organisation" link
-function  reopenTeamList() {
-  const teamLink = document.getElementById('team');
-  teamLink.click(); // Trigger the click event to reopen the link
-}
+            // Set the email in the dropdown button
+            document.getElementById('dropdownMenuButton').textContent = data.email;
+        }
+    });
+
+    document.getElementById('signin').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('register').style.display = 'none';
+        document.getElementById('login-user').style.display = 'block';
+        document.getElementById('auth-check').style.display = 'none';
+    });
+
+    document.getElementById('new-user').addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('login-user').style.display = 'none';
+        document.getElementById('register').style.display = 'block';
+        document.getElementById('auth-check').style.display = 'none';
+    });
+
+    document.getElementById('signout').addEventListener('click', async (e) => {
+        e.preventDefault();
+        const db = await idb.openDB('userCredentials', 1);
+        await db.clear('credentials'); // Clear the 'credentials' object store
+        console.log('Email and hashed password cleared from IndexedDB');
+
+        // Show login form and hide authentication check
+        document.getElementById('register').style.display = 'none';
+        document.getElementById('login-user').style.display = 'block';
+        document.getElementById('auth-check').style.display = 'none';
+    });
 </script>
 
-<!-- JavaScript at the end of your HTML body -->
+  <script>
+  
+    function sortTable() {
+      let table = document.getElementById('myTicket');
+      let rows = Array.from(table.rows).slice(1); // Skip header row
+      // Sort rows by 'Priority' (4th column in this example)
+      rows.sort((a, b) => {
+        let priorityA = a.cells[3].textContent.trim().toLowerCase();
+        let priorityB = b.cells[3].textContent.trim().toLowerCase();
+    
+        // Assign numerical values to prioritize ('high' > 'medium' > 'low')
+        let priorityValue = {
+          'high': 3,
+          'medium': 2,
+          'low': 1
+        };
+    
+        return priorityValue[priorityB] - priorityValue[priorityA]; // Sort descending
+      });
+      // Re-append sorted rows to table
+      for (let row of rows) {
+        table.tBodies[0].appendChild(row);
+      }
+    }    
+  
+    function searchTable() {
+      let input = prompt('Enter search keyword:');
+      if (!input) return; // Cancelled or empty input
+      input = input.toLowerCase().trim();
+      let table = document.getElementById('myTicket');
+      let rows = table.getElementsByTagName('tr');
+      // Iterate through rows starting from index 1 (skip header row)
+      for (let i = 1; i < rows.length; i++) {
+        let row = rows[i];
+        let found = false;
+        // Check each cell's text content for the search input
+        for (let j = 0; j < row.cells.length; j++) {
+          let cellText = row.cells[j].textContent.toLowerCase().trim();
+          if (cellText.includes(input)) {
+            found = true;
+            break;
+          }
+        }
+        row.style.display = found ? '' : 'none';
+      }
+    }
+  </script>
+
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const collectionsLink = document.getElementById('collectionsLink');
-      collectionsLink.addEventListener('click', async (event) => {
-          event.preventDefault(); // Prevent default link behavior
-          await fetchOrganizations(); // Fetch organizations when link is clicked
-      });
-  });
 
-  // Function to fetch organizations and display them
-  async function fetchOrganizations() {
-      try {
-          const response = await fetch('/organizations');
-          if (!response.ok) {
-              throw new Error('Failed to fetch organizations');
-          }
-          const organizations = await response.json();
-          const organizationList = document.getElementById('organizationList');
-          organizationList.innerHTML = ''; // Clear previous list
-
-          organizations.forEach(org => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${org.name}</td>
-                <td>${org.email}</td>
-                <td>${org.address}</td>
-                <td>${org.phone}</td>
-                <td>
-                    <button class="btn btn-primary me-2 btn-sm" onclick="editOrganization('${org._id}')">Edit</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteOrganization('${org._id}')">Delete</button>
-                </td>
-            `;
-            organizationList.appendChild(tr);
-        });
-      } catch (error) {
-          console.error('Error fetching organizations:', error);
+  function filterProjectTable(teamId) {
+    let table = document.getElementById('projectTable');
+    let rows = table.getElementsByTagName('tr');
+    // Iterate through rows starting from index 1 (skip header row)
+    for (let i = 1; i < rows.length; i++) {
+      let row = rows[i];
+      let teamIdCell = row.cells[4]; // Index of 'Team ID' column
+      if (teamId === 'All' || teamIdCell.textContent.trim() === teamId) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
       }
-  }
-  // Function to delete an organization
-  async function deleteOrganization(id) {
-      try {
-          const response = await fetch(`/organizations/${id}`, {
-              method: 'DELETE'
-          });
-          if (!response.ok) {
-              throw new Error('Failed to delete organization');
-          }
-          const data = await response.json();
-          console.log(data.message); // Log success message
-          await fetchOrganizations(); // Refresh the list after deletion
-      } catch (error) {
-          console.error('Error deleting organization:', error);
-      }
+    }
   }
 
-  // Function to dynamically create and handle organization edit form
-async function editOrganization(id) {
-  try {
-      // Fetch organization data
-      const response = await fetch(`/organizations/${id}`);
-      if (!response.ok) {
-          throw new Error('Failed to fetch organization details');
-      }
-      const organization = await response.json();
-      
-      // Create form elements
-      const formContainer = document.createElement('div');
-      formContainer.classList.add('container', 'mt-5');
-      
-      const formTitle = document.createElement('h2');
-      formTitle.textContent = 'Edit Organization';
-      
-      const form = document.createElement('form');
-      form.id = 'editOrganizationForm';
-      
-      // Name input field
-      const nameLabel = document.createElement('label');
-      nameLabel.setAttribute('for', 'editName');
-      nameLabel.textContent = 'Name';
-      
-      const nameInput = document.createElement('input');
-      nameInput.type = 'text';
-      nameInput.classList.add('form-control');
-      nameInput.id = 'editName';
-      nameInput.value = organization.name;
-      nameInput.required = true;
-      
-      // Address input field
-      const addressLabel = document.createElement('label');
-      addressLabel.setAttribute('for', 'editAddress');
-      addressLabel.textContent = 'Address';
-      
-      const addressInput = document.createElement('input');
-      addressInput.type = 'text';
-      addressInput.classList.add('form-control');
-      addressInput.id = 'editAddress';
-      addressInput.value = organization.address;
-      addressInput.required = true;
-      
-      // Phone input field
-      const phoneLabel = document.createElement('label');
-      phoneLabel.setAttribute('for', 'editPhone');
-      phoneLabel.textContent = 'Phone';
-      
-      const phoneInput = document.createElement('input');
-      phoneInput.type = 'text';
-      phoneInput.classList.add('form-control');
-      phoneInput.id = 'editPhone';
-      phoneInput.value = organization.phone;
-      phoneInput.required = true;
-      
-      // Email input field
-      const emailLabel = document.createElement('label');
-      emailLabel.setAttribute('for', 'editEmail');
-      emailLabel.textContent = 'Email';
-      
-      const emailInput = document.createElement('input');
-      emailInput.type = 'email';
-      emailInput.classList.add('form-control');
-      emailInput.id = 'editEmail';
-      emailInput.value = organization.email;
-      emailInput.required = true;
-      
-      // Submit button
-      const submitButton = document.createElement('button');
-      submitButton.type = 'submit';
-      submitButton.classList.add('btn', 'btn-primary', 'me-2');
-      submitButton.textContent = 'Save';
-      
-      // Cancel button
-      const cancelButton = document.createElement('button');
-      cancelButton.type = 'button';
-      cancelButton.classList.add('btn', 'btn-secondary');
-      cancelButton.textContent = 'Cancel';
-      cancelButton.addEventListener('click', () => {
-          formContainer.remove(); // Remove the form on cancel
-          openOrganizationsLink(); // Reopen the "My Organisation" link
-      });
-      
-      // Append elements to form
-      form.append(
-          nameLabel, nameInput,
-          addressLabel, addressInput,
-          phoneLabel, phoneInput,
-          emailLabel, emailInput,
-          submitButton, cancelButton
-      );
-      
-      // Append form elements to container
-      formContainer.append(formTitle, form);
-      
-      // Append form container to the specified div
-      const userContentDiv = document.getElementById('dg-app-user-content');
-      userContentDiv.innerHTML = ''; // Clear existing content (if any)
-      userContentDiv.appendChild(formContainer);
-      
-      // Handle form submission
-      form.addEventListener('submit', async (event) => {
-          event.preventDefault();
-          
-          const updatedOrganization = {
-              name: nameInput.value,
-              address: addressInput.value,
-              phone: phoneInput.value,
-              email: emailInput.value
-          };
-          
-          try {
-              const updateResponse = await fetch(`/organizations/${id}`, {
-                  method: 'PATCH',
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(updatedOrganization)
-              });
-              
-              if (!updateResponse.ok) {
-                  throw new Error('Failed to update organization');
-              }
-              
-              const updatedData = await updateResponse.json();
-              console.log('Organization updated:', updatedData);
-              
-              // Remove the form after successful update
-              formContainer.remove();
-              openOrganizationsLink(); // Reopen the "My Organisation" link
-              
-              // Optionally, refresh organization list or perform other actions
-              await fetchOrganizations(); // Example function to fetch organizations list
-          } catch (error) {
-              console.error('Error updating organization:', error);
-              // Handle error display or logging
-          }
-      });
-      
-  } catch (error) {
-      console.error('Error fetching organization details:', error);
-      // Handle error display or logging
-  }
-}
+  function sortProjectTable() {
+    let table = document.getElementById('projectTable');
+    let tbody = table.querySelector('tbody');
+    let rows = Array.from(tbody.rows);
 
-// Function to open the "My Organisation" link
-function openOrganizationsLink() {
-  const collectionsLink = document.getElementById('collectionsLink');
-  collectionsLink.click(); // Trigger the click event to reopen the link
-}
+    rows.sort((a, b) => {
+      let endDateA = new Date(a.cells[3].textContent.trim());
+      let endDateB = new Date(b.cells[3].textContent.trim());
+      return endDateA - endDateB; // Sort by End Date
+    });
+
+    // Clear existing rows in tbody
+    while (tbody.firstChild) {
+      tbody.removeChild(tbody.firstChild);
+    }
+
+    // Append sorted rows to tbody
+    rows.forEach(row => {
+      tbody.appendChild(row);
+    });
+  }
+
+  function searchProjectTable() {
+    let input = prompt('Enter search keyword:');
+    if (!input) return; // Cancelled or empty input
+    input = input.toLowerCase().trim();
+    let table = document.getElementById('projectTable');
+    let rows = table.getElementsByTagName('tr');
+    // Iterate through rows starting from index 1 (skip header row)
+    for (let i = 1; i < rows.length; i++) {
+      let row = rows[i];
+      let found = false;
+      // Check each cell's text content for the search input
+      for (let j = 0; j < row.cells.length; j++) {
+        let cellText = row.cells[j].textContent.toLowerCase().trim();
+        if (cellText.includes(input)) {
+          found = true;
+          break;
+        }
+      }
+      row.style.display = found ? '' : 'none';
+    }
+  }
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-      const projectsLink = document.getElementById('projects');
-      projectsLink.addEventListener('click', async (event) => {
-          event.preventDefault(); // Prevent default link behavior
-          await fetchAndDisplayProjects(); // Fetch projects when link is clicked
-      });
-  });
+  function sortLeadsTable() {
+    let table = document.getElementById('mytickets');
+    let tbody = table.querySelector('tbody');
+    let rows = Array.from(tbody.rows);
 
-  async function fetchAndDisplayProjects() {
-    try {
-        const response = await fetch('/projects'); // Fetch data from the backend
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const projects = await response.json(); // Parse JSON response
+    rows.sort((a, b) => {
+      let nameA = a.cells[0].textContent.trim().toLowerCase();
+      let nameB = b.cells[0].textContent.trim().toLowerCase();
+      return nameA.localeCompare(nameB); // Sort by Name
+    });
 
-        const projectListContainer = document.getElementById('projectList');
-        projectListContainer.innerHTML = ''; // Clear any existing table rows
-
-        // Iterate through the projects and create table rows
-        projects.forEach(project => {
-            const row = document.createElement('tr');
-
-            // Name
-            let cell = document.createElement('td');
-            cell.textContent = project.name;
-            row.appendChild(cell);
-
-            // Description
-            cell = document.createElement('td');
-            cell.textContent = project.description;
-            row.appendChild(cell);
-
-            // Start Date
-            cell = document.createElement('td');
-            cell.textContent = project.startDate;
-            row.appendChild(cell);
-
-            // End Date
-            cell = document.createElement('td');
-            cell.textContent = project.endDate;
-            row.appendChild(cell);
-
-            // Team ID
-            cell = document.createElement('td');
-            cell.textContent = project.teamId;
-            row.appendChild(cell);
-
-            // Actions (Edit and Delete buttons)
-            cell = document.createElement('td');
-            
-            // Edit button
-            const editButton = document.createElement('button');
-            editButton.textContent = 'Edit';
-            editButton.classList.add('btn', 'btn-primary', 'me-2', 'btn-sm' );
-            editButton.onclick = () => editProject(project._id);
-            cell.appendChild(editButton);
-
-            // Delete button
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
-            deleteButton.onclick = () => deleteProject(project._id, row);
-            cell.appendChild(deleteButton);
-
-            row.appendChild(cell);
-
-            projectListContainer.appendChild(row);
-        });
-    } catch (error) {
-        console.error('There has been a problem with your fetch operation:', error);
+    // Clear existing rows in tbody
+    while (tbody.firstChild) {
+      tbody.removeChild(tbody.firstChild);
     }
-}
 
-
-  async function editProject(projectId) {
-      try {
-          const response = await fetch(`/projects/${projectId}`);
-          if (!response.ok) {
-              throw new Error('Failed to fetch project details');
-          }
-          const project = await response.json();
-
-          const formContainer = document.createElement('div');
-          formContainer.classList.add('container', 'mt-5');
-
-          const formTitle = document.createElement('h2');
-          formTitle.textContent = 'Edit Project';
-
-          const form = document.createElement('form');
-          form.id = 'editProjectForm';
-
-          // Name input field
-          const nameLabel = document.createElement('label');
-          nameLabel.setAttribute('for', 'editProjectName');
-          nameLabel.textContent = 'Name';
-
-          const nameInput = document.createElement('input');
-          nameInput.type = 'text';
-          nameInput.classList.add('form-control');
-          nameInput.id = 'editProjectName';
-          nameInput.value = project.name;
-          nameInput.required = true;
-
-          // Description input field
-          const descriptionLabel = document.createElement('label');
-          descriptionLabel.setAttribute('for', 'editProjectDescription');
-          descriptionLabel.textContent = 'Description';
-
-          const descriptionInput = document.createElement('textarea');
-          descriptionInput.classList.add('form-control');
-          descriptionInput.id = 'editProjectDescription';
-          descriptionInput.textContent = project.description;
-          descriptionInput.required = true;
-
-          // Start Date input field
-          const startDateLabel = document.createElement('label');
-          startDateLabel.setAttribute('for', 'editProjectStartDate');
-          startDateLabel.textContent = 'Start Date';
-
-          const startDateInput = document.createElement('input');
-          startDateInput.type = 'date';
-          startDateInput.classList.add('form-control');
-          startDateInput.id = 'editProjectStartDate';
-          startDateInput.value = project.startDate;
-          startDateInput.required = true;
-
-          // End Date input field
-          const endDateLabel = document.createElement('label');
-          endDateLabel.setAttribute('for', 'editProjectEndDate');
-          endDateLabel.textContent = 'End Date';
-
-          const endDateInput = document.createElement('input');
-          endDateInput.type = 'date';
-          endDateInput.classList.add('form-control');
-          endDateInput.id = 'editProjectEndDate';
-          endDateInput.value = project.endDate;
-
-          // Team ID input field
-          const teamIdLabel = document.createElement('label');
-          teamIdLabel.setAttribute('for', 'editProjectTeamId');
-          teamIdLabel.textContent = 'Team ID';
-
-          const teamIdInput = document.createElement('input');
-          teamIdInput.type = 'text';
-          teamIdInput.classList.add('form-control');
-          teamIdInput.id = 'editProjectTeamId';
-          teamIdInput.value = project.teamId;
-          teamIdInput.required = true;
-
-          // Submit button
-          const submitButton = document.createElement('button');
-          submitButton.type = 'submit';
-          submitButton.classList.add('btn', 'btn-primary', 'me-2');
-          submitButton.textContent = 'Save';
-
-          // Cancel button
-          const cancelButton = document.createElement('button');
-          cancelButton.type = 'button';
-          cancelButton.classList.add('btn', 'btn-secondary');
-          cancelButton.textContent = 'Cancel';
-          cancelButton.addEventListener('click', () => {
-              formContainer.remove(); // Remove the form on cancel
-              reopenProjectList();
-          });
-
-          // Append elements to form
-          form.append(
-              nameLabel, nameInput,
-              descriptionLabel, descriptionInput,
-              startDateLabel, startDateInput,
-              endDateLabel, endDateInput,
-              teamIdLabel, teamIdInput,
-              submitButton, cancelButton
-          );
-
-          // Append form elements to container
-          formContainer.append(formTitle, form);
-
-          // Append form container to the specified div
-          const userContentDiv = document.getElementById('dg-app-user-content');
-          userContentDiv.innerHTML = ''; // Clear existing content (if any)
-          userContentDiv.appendChild(formContainer);
-
-          // Handle form submission
-          form.addEventListener('submit', async (event) => {
-              event.preventDefault();
-
-              const updatedProject = {
-                  name: nameInput.value,
-                  description: descriptionInput.value,
-                  startDate: startDateInput.value,
-                  endDate: endDateInput.value,
-                  teamId: teamIdInput.value
-              };
-
-              try {
-                  const updateResponse = await fetch(`/projects/${projectId}`, {
-                      method: 'PATCH',
-                      headers: {
-                          'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify(updatedProject)
-                  });
-
-                  if (!updateResponse.ok) {
-                      throw new Error('Failed to update project');
-                  }
-
-                  const updatedData = await updateResponse.json();
-                  console.log('Project updated:', updatedData);
-
-                  // Remove the form after successful update
-                  formContainer.remove();
-                  reopenProjectList();
-                  // Optionally, refresh project list or perform other actions
-                  await fetchAndDisplayProjects(); // Example function to fetch projects list
-              } catch (error) {
-                  console.error('Error updating project:', error);
-                  // Handle error display or logging
-              }
-          });
-
-      } catch (error) {
-          console.error('Error fetching project details:', error);
-          // Handle error display or logging
-      }
+    // Append sorted rows to tbody
+    rows.forEach(row => {
+      tbody.appendChild(row);
+    });
   }
 
-  async function deleteProject(projectId, listItem) {
-      if (!confirm("Are you sure you want to delete this project?")) {
-          return;
+  function searchLeadsTable() {
+    let input = prompt('Enter search keyword:');
+    if (!input) return; // Cancelled or empty input
+    input = input.toLowerCase().trim();
+    let table = document.getElementById('mytickets');
+    let rows = table.getElementsByTagName('tr');
+    // Iterate through rows starting from index 1 (skip header row)
+    for (let i = 1; i < rows.length; i++) {
+      let row = rows[i];
+      let found = false;
+      // Check each cell's text content for the search input
+      for (let j = 0; j < row.cells.length; j++) {
+        let cellText = row.cells[j].textContent.toLowerCase().trim();
+        if (cellText.includes(input)) {
+          found = true;
+          break;
+        }
       }
-
-      try {
-          const response = await fetch(`/projects/${projectId}`, {
-              method: 'DELETE'
-          });
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          const result = await response.json();
-          console.log(result.message);
-          // Remove the list item from the DOM
-          listItem.remove();
-      } catch (error) {
-          console.error('There has been a problem with your fetch operation:', error);
-      }
-  }
-
-  // Function to open the "My Projects" link
-  function reopenProjectList() {
-      const projectsLink = document.getElementById('projects');
-      projectsLink.click(); // Trigger the click event to reopen the link
+      row.style.display = found ? '' : 'none';
+    }
   }
 </script>
 
+<script src="https://unpkg.com/idb@6.0.0/build/iife/index-min.js"></script>
+
+<script src="./function/dg-app-frontend.js"></script>
 
 <script src="./function/bootstrap-js-dg-app/bootstrap.bundle.min.js"></script>
 <script src="./function/bootstrap-js-dg-app/bootstrap-sidebar-clopsable-dg-app.js"></script>

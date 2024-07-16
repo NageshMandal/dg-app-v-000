@@ -2,7 +2,7 @@ import { dashboardTemplate } from '../template/dashboard.js';
 import { openTicketsTemplate } from '../template/openticket.js';
 import { closedTicketsTemplate } from '../template/closeticket.js';
 import { resentActivityTemplate } from '../template/resentActivity.js';
-import {  orgTemplate } from '../form/dg-app-entity/dg-app-entity-org.js';
+import { orgTemplate } from '../form/dg-app-entity/dg-app-entity-org.js';
 import { leadTemplate } from '../form/dg-app-entity/dg-app-entity-lead.js';
 import { projectTemplate } from '../form/dg-app-entity/dg-app-entity-project.js';
 import { teamTemplate } from '../form/dg-app-entity/dg-app-entity-team.js';

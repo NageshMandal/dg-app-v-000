@@ -3,12 +3,6 @@ export const closedTicketsTemplate = `
     <div class="container mt-5">
       <h2>My Closed Tasks</h2>
       <div class="d-flex mb-3">
-          <a href="#" class="nav-feature"><i class="fas fa-th-list"></i> By status</a>
-          <a href="#" class="nav-feature active"><i class="fas fa-table"></i> By sprint</a>
-          <a href="#" class="nav-feature"><i class="fas fa-project-diagram"></i> Launch timeline</a>
-          <a href="#" class="nav-feature"><i class="fas fa-calendar-alt"></i> Calendar</a>
-          <a href="#" class="nav-feature"><i class="fas fa-user-friends"></i> By owner</a>
-          <a href="#" class="nav-feature"><i class="fas fa-list"></i> List</a>
           <a href="#" class="ml-auto nav-feature"><i class="fas fa-filter"></i> Filter</a>
           <a href="#" class="nav-feature"><i class="fas fa-sort"></i> Sort</a>
           <a href="#" class="nav-feature"><i class="fas fa-search"></i></a>

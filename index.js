@@ -1,13 +1,13 @@
-// index.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const organizationRoutes = require('./routes/organization');
-const leadRoutes = require('./routes/lead'); // Import lead routes
-const teamRouts = require('./routes/team')
-const projectRoutes = require('./routes/project')
+const leadRoutes = require('./routes/lead');
+const teamRouts = require('./routes/team');
+const projectRoutes = require('./routes/project');
 const ticketRoutes = require('./routes/ticket');
+const userRoutes = require('./routes/user'); // Import user routes
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -17,14 +17,14 @@ const port = process.env.PORT || 3000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Serve static files (HTML, CSS, JS) from 'public' folder
-
-// Middleware
 app.use(bodyParser.json());
+
 app.use('/organizations', organizationRoutes);
 app.use('/leads', leadRoutes);
 app.use('/projects', projectRoutes);
 app.use('/teams', teamRouts);
 app.use('/tickets', ticketRoutes);
+app.use('/users', userRoutes); // Use user routes
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
