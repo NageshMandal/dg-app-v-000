@@ -214,8 +214,11 @@
   <div id="register" class="container container2">
     <div class="row justify-content-center">
       <div class="col-md-6">
+        <br>
+        <img width="auto" height="64" src="./assets/dg-app-logo/ducis group logo v 0-0-2 trans dark.png" alt="" class="mx-auto d-block">
+        <br>
         <h2 class="text-center">Register</h2>
-        <form id="registerForm">
+        <form id="registerForm" class="border p-4">
           <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
@@ -233,8 +236,8 @@
             <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
           </div>
           <button type="submit" class="btn btn-primary btn-block">Register</button>
+          <button id="signin" class="btn btn-outline-secondary btn-block">Login</button>
         </form>
-        <a id="signin" href="#">Sign in</a>
       </div>
     </div>
   </div>
@@ -242,19 +245,22 @@
   <div id="login-user" class="container container2">
     <div class="row justify-content-center">
       <div class="col-md-6">
+        <br>
+        <img width="auto" height="64" src="./assets/dg-app-logo/ducis group logo v 0-0-2 trans dark.png" alt="" class="mx-auto d-block">
+        <br>
         <h2 class="text-center">Login</h2>
-        <form id="loginForm">
+        <form id="loginForm" class="border p-4">
           <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
           </div>
-          <div class="form-group">
+          <div class="form-group" >
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
           </div>
           <button type="submit" class="btn btn-primary btn-block">Login</button>
+          <button id="new-user" class="btn btn-outline-secondary btn-block">Register</button>
         </form>
-        <a id="new-user" href="#">Register</a>
       </div>
     </div>
   </div>
@@ -540,6 +546,7 @@
         });
 
         const result = await response.json();
+        alert(result.message);
 
         if (response.status === 200) {
             // Save email and hashed password to IndexedDB
