@@ -150,4 +150,5 @@ export const dashboardTemplate = `
       </div>
   </div>
   </div>
+  
 `;

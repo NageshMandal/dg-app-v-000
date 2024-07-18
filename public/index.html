@@ -24,6 +24,56 @@
 <!-- Inside your HTML file, preferably in a <style> tag or linked CSS file -->
 
   <style>
+    .bindu {
+      position: absolute;
+      width: 25px; /* Adjust size as needed */
+      height: 25px; /* Adjust size as needed */
+      background-image: url('./assets/icon/annotation.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      cursor: pointer;
+  }
+  
+  .comment-box {
+      position: absolute;
+  
+      background-color: white;
+      border: 1px solid #ccc;
+      margin: 8px;
+      padding: 10px;
+      width: 200px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+  }
+  
+  .comment-box textarea {
+      width: 100%;
+      height: 60px;
+  }
+  
+  .comment-box button {
+      margin-top: 8px;
+      margin-right: 5px;
+  }
+  
+  .context-menu {
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      width: 150px;
+  }
+  
+  .context-menu-item {
+      padding: 10px;
+      cursor: pointer;
+  }
+  
+  .context-menu-item:hover {
+      background-color: #f0f0f0;
+  }
+  
     /* Additional styling for dropdown menu */
     .dropdown-menu {
       display: none;
@@ -319,7 +369,7 @@
                   </ul>
                   <ul class="nav nav-pills flex-column mb-auto">
                     <li>
-                      <a href="#" id="dashboard" class="nav-link link-body-emphasis">
+                      <a href="/" id="dashboard" class="nav-link link-body-emphasis" data-target="dashboard" >
                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
                         Dashboard
                       </a>
@@ -435,8 +485,9 @@
           <input id="search"  type="text" class="form-control" placeholder="Search...">
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group me-2">
-              <!-- <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-              <button  type="button" class="btn btn-sm btn-outline-secondary" id="exportData" >Export</button> -->
+              <button class="btn btn-sm btn-outline-secondary" id="plant-bindu-button">Plant Bindu</button>
+              <button class="btn btn-sm btn-outline-secondary" id="export-button">Export Annotations</button>
+              
             </div>
           </div>
         </div>
@@ -450,6 +501,18 @@
     </div>
   </div>
 
+  <script src="./function/bindu/index.js"></script>
+
+  <script>
+    document.getElementById('dashboard').addEventListener('click', () => {
+      // Replace the current history state with the dashboard state
+      history.replaceState(null, '', '/dashboard');
+  
+      // Load the dashboard template immediately
+      loadTemplate(templates.dashboard, '/dashboard');
+  });
+  
+  </script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const registerForm = document.getElementById('register');

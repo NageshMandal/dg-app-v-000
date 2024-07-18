@@ -8,10 +8,10 @@ import { projectTemplate } from '../form/dg-app-entity/dg-app-entity-project.js'
 import { teamTemplate } from '../form/dg-app-entity/dg-app-entity-team.js';
 import { ticketTemplate } from '../form/dg-app-entity/dg-app-entity-ticket.js';
 import { organizationsTemplate } from '../template/myorg.js';
-import { teamlistTemplate } from '../template/myteam.js'
-import { projectslistTemplate } from '../template/myproject.js'
-import { leadlistTemplate } from '../template/mylead.js'
-import { ticketlistTemplate } from '../template/myticket.js'
+import { teamlistTemplate } from '../template/myteam.js';
+import { projectslistTemplate } from '../template/myproject.js';
+import { leadlistTemplate } from '../template/mylead.js';
+import { ticketlistTemplate } from '../template/myticket.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const templates = {
@@ -31,8 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ticketlist: ticketlistTemplate
     };
 
-    const loadTemplate = (template) => {
+    const loadTemplate = (template, url) => {
         document.getElementById('dg-app-user-content').innerHTML = template;
+        if (url) {
+            history.pushState(null, '', url);
+        }
     };
 
     document.querySelectorAll('.nav-link').forEach(link => {
@@ -40,11 +43,25 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const target = e.currentTarget.getAttribute('data-target');
             if (templates[target]) {
-                loadTemplate(templates[target]);
+                loadTemplate(templates[target], `/${target}`);
             }
         });
     });
 
-    // Load the default template
-    loadTemplate(templates.dashboard);
+    window.addEventListener('popstate', () => {
+        const path = window.location.pathname.slice(1);
+        if (path === 'dashboard' || !templates[path]) {
+            loadTemplate(dashboardTemplate, '/dashboard');
+        } else {
+            loadTemplate(templates[path], null);
+        }
+    });    
+    
+
+    const initialPath = window.location.pathname.slice(1);
+    if (templates[initialPath]) {
+        loadTemplate(templates[initialPath], null);
+    } else {
+        loadTemplate(templates.dashboard, '/dashboard');
+    }
 });

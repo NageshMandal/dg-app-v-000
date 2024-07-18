@@ -2,9 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const path = require('path'); // Add this for resolving paths
 const organizationRoutes = require('./routes/organization');
 const leadRoutes = require('./routes/lead');
-const teamRouts = require('./routes/team');
+const teamRoutes = require('./routes/team'); // Fix typo here
 const projectRoutes = require('./routes/project');
 const ticketRoutes = require('./routes/ticket');
 const userRoutes = require('./routes/user'); // Import user routes
@@ -22,7 +23,7 @@ app.use(bodyParser.json());
 app.use('/organizations', organizationRoutes);
 app.use('/leads', leadRoutes);
 app.use('/projects', projectRoutes);
-app.use('/teams', teamRouts);
+app.use('/teams', teamRoutes); // Fix typo here
 app.use('/tickets', ticketRoutes);
 app.use('/users', userRoutes); // Use user routes
 
@@ -41,6 +42,11 @@ app.get('/status', (req, res) => {
         3: 'disconnecting'
     };
     res.send({ status: statusMap[connectionState] });
+});
+
+// Catch-all route to serve index.html for any other route
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
 // Start the server
