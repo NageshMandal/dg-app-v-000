@@ -3,6 +3,7 @@ import { openTicketsTemplate } from '../template/openticket.js';
 import { closedTicketsTemplate } from '../template/closeticket.js';
 import { resentActivityTemplate } from '../template/resentActivity.js';
 import { orgTemplate } from '../form/dg-app-entity/dg-app-entity-org.js';
+import { ContactTemplate } from '../form/dg-app-entity/dg-app-entity-contact.js';
 import { leadTemplate } from '../form/dg-app-entity/dg-app-entity-lead.js';
 import { projectTemplate } from '../form/dg-app-entity/dg-app-entity-project.js';
 import { teamTemplate } from '../form/dg-app-entity/dg-app-entity-team.js';
@@ -12,6 +13,7 @@ import { teamlistTemplate } from '../template/myteam.js';
 import { projectslistTemplate } from '../template/myproject.js';
 import { leadlistTemplate } from '../template/mylead.js';
 import { ticketlistTemplate } from '../template/myticket.js';
+import { mycontactTemplate } from '../template/mycontact.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const templates = {
@@ -28,7 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
         teamlist: teamlistTemplate,
         projectlist: projectslistTemplate,
         leadlist: leadlistTemplate,
-        ticketlist: ticketlistTemplate
+        ticketlist: ticketlistTemplate,
+        contact: ContactTemplate,
+        mycontact:  mycontactTemplate
     };
 
     const loadTemplate = (template, url) => {

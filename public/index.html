@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="./function/bootstrap-js-dg-app/color-modes.js"></script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -14,8 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
@@ -362,6 +359,7 @@
                           <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded nav-link" data-target="project" >Project <i class="bi bi-plus-lg"></i></a></li>
                           <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded nav-link" data-target="ticket" >Ticket <i class="bi bi-plus-lg"></i></a></li>
                           <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded nav-link" data-target="lead" >Lead <i class="bi bi-plus-lg"></i></a></li>
+                          <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded nav-link" data-target="contact" >Contact<i class="bi bi-plus-lg"></i></a></li>
                         </ul>
                       </div>
                     </li>
@@ -402,6 +400,12 @@
                       <a href="#" class="nav-link link-body-emphasis">
                         <i class="bi bi-inbox"></i>
                         Inbox
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="nav-link link-body-emphasis" data-target="mycontact" id="mycontacts">
+                        <i class="bi bi-person-lines-fill"></i>
+                        My Contacts
                       </a>
                     </li>
                     <!-- <li>
@@ -815,6 +819,245 @@
       row.style.display = found ? '' : 'none';
     }
   }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const contactsLink = document.getElementById('mycontacts');
+    contactsLink.addEventListener('click', async (event) => {
+        event.preventDefault(); // Prevent default link behavior
+        await fetchAndDisplayContacts(); // Fetch contacts when link is clicked
+    });
+});
+
+async function fetchAndDisplayContacts() {
+    try {
+        const response = await fetch('/contacts/getAllContacts'); // Fetch data from the backend
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const contacts = await response.json(); // Parse JSON response
+
+        const contactListContainer = document.querySelector('#ContactList tbody');
+        contactListContainer.innerHTML = ''; // Clear any existing rows
+
+        // Iterate through the contacts and create table rows
+        contacts.forEach(contact => {
+            const row = document.createElement('tr');
+
+            // Name
+            let cell = document.createElement('td');
+            cell.textContent = contact.name;
+            row.appendChild(cell);
+
+            // Email
+            cell = document.createElement('td');
+            cell.textContent = contact.email;
+            row.appendChild(cell);
+
+            // Phone
+            cell = document.createElement('td');
+            cell.textContent = contact.phone;
+            row.appendChild(cell);
+
+            // Address
+            cell = document.createElement('td');
+            cell.textContent = contact.address;
+            row.appendChild(cell);
+
+            // Actions (Edit and Delete buttons)
+            cell = document.createElement('td');
+
+            // Edit button
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.classList.add('btn', 'btn-primary', 'me-2', 'btn-sm');
+            editButton.onclick = () => editContact(contact._id);
+            cell.appendChild(editButton);
+
+            // Delete button
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+            deleteButton.onclick = () => deleteContact(contact._id, row);
+            cell.appendChild(deleteButton);
+
+            row.appendChild(cell);
+
+            contactListContainer.appendChild(row);
+        });
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+}
+
+async function editContact(contactId) {
+  try {
+      const response = await fetch(`/contacts/${contactId}`);
+      if (!response.ok) {
+          throw new Error('Failed to fetch contact details');
+      }
+      const contact = await response.json();
+
+      const formContainer = document.createElement('div');
+      formContainer.classList.add('container', 'mt-5');
+
+      const formTitle = document.createElement('h2');
+      formTitle.textContent = 'Edit Contact';
+
+      const form = document.createElement('form');
+      form.id = 'editContactForm';
+
+      // Name input field
+      const nameLabel = document.createElement('label');
+      nameLabel.setAttribute('for', 'editContactName');
+      nameLabel.textContent = 'Name';
+
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.classList.add('form-control');
+      nameInput.id = 'editContactName';
+      nameInput.value = contact.name;
+      nameInput.required = true;
+
+      // Email input field
+      const emailLabel = document.createElement('label');
+      emailLabel.setAttribute('for', 'editContactEmail');
+      emailLabel.textContent = 'Email';
+
+      const emailInput = document.createElement('input');
+      emailInput.type = 'email';
+      emailInput.classList.add('form-control');
+      emailInput.id = 'editContactEmail';
+      emailInput.value = contact.email;
+      emailInput.required = true;
+
+      // Phone input field
+      const phoneLabel = document.createElement('label');
+      phoneLabel.setAttribute('for', 'editContactPhone');
+      phoneLabel.textContent = 'Phone';
+
+      const phoneInput = document.createElement('input');
+      phoneInput.type = 'text';
+      phoneInput.classList.add('form-control');
+      phoneInput.id = 'editContactPhone';
+      phoneInput.value = contact.phone;
+      phoneInput.required = true;
+
+      // Address input field
+      const addressLabel = document.createElement('label');
+      addressLabel.setAttribute('for', 'editContactAddress');
+      addressLabel.textContent = 'Address';
+
+      const addressInput = document.createElement('textarea');
+      addressInput.classList.add('form-control');
+      addressInput.id = 'editContactAddress';
+      addressInput.textContent = contact.address;
+      addressInput.required = true;
+
+      // Submit button
+      const submitButton = document.createElement('button');
+      submitButton.type = 'submit';
+      submitButton.classList.add('btn', 'btn-primary', 'me-2');
+      submitButton.textContent = 'Save';
+
+      // Cancel button
+      const cancelButton = document.createElement('button');
+      cancelButton.type = 'button';
+      cancelButton.classList.add('btn', 'btn-secondary');
+      cancelButton.textContent = 'Cancel';
+      cancelButton.addEventListener('click', () => {
+          formContainer.remove(); // Remove the form on cancel
+          reopenContactList();
+      });
+
+      // Append elements to form
+      form.append(
+          nameLabel, nameInput,
+          emailLabel, emailInput,
+          phoneLabel, phoneInput,
+          addressLabel, addressInput,
+          submitButton, cancelButton
+      );
+
+      // Append form elements to container
+      formContainer.append(formTitle, form);
+
+      // Append form container to the specified div
+      const userContentDiv = document.getElementById('dg-app-user-content');
+      userContentDiv.innerHTML = ''; // Clear existing content (if any)
+      userContentDiv.appendChild(formContainer);
+
+      // Handle form submission
+      form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const updatedContact = {
+              name: nameInput.value,
+              email: emailInput.value,
+              phone: phoneInput.value,
+              address: addressInput.value
+          };
+
+          try {
+              const updateResponse = await fetch(`/contacts/${contactId}`, {
+                  method: 'PATCH',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(updatedContact)
+              });
+
+              if (!updateResponse.ok) {
+                  throw new Error('Failed to update contact');
+              }
+
+              const updatedData = await updateResponse.json();
+              console.log('Contact updated:', updatedData);
+
+              // Remove the form after successful update
+              formContainer.remove();
+              reopenContactList();
+              // Optionally, refresh contact list or perform other actions
+              await fetchAndDisplayContacts(); // Example function to fetch contact list
+          } catch (error) {
+              console.error('Error updating contact:', error);
+              // Handle error display or logging
+          }
+      });
+
+  } catch (error) {
+      console.error('Error fetching contact details:', error);
+      // Handle error display or logging
+  }
+}
+
+async function deleteContact(contactId, listItem) {
+  if (!confirm("Are you sure you want to delete this contact?")) {
+      return;
+  }
+
+  try {
+      const response = await fetch(`/contacts/${contactId}`, {
+          method: 'DELETE'
+      });
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      const result = await response.json();
+      console.log(result.message);
+      // Remove the list item from the DOM
+      listItem.remove();
+  } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+  }
+}
+
+function reopenContactList() {
+  const contactsLink = document.getElementById('mycontacts');
+  contactsLink.click(); // Trigger the click event to reopen the link
+}
+
 </script>
 
 <script src="https://unpkg.com/idb@6.0.0/build/iife/index-min.js"></script>

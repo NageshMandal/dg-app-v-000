@@ -9,6 +9,7 @@ const teamRoutes = require('./routes/team'); // Fix typo here
 const projectRoutes = require('./routes/project');
 const ticketRoutes = require('./routes/ticket');
 const userRoutes = require('./routes/user'); // Import user routes
+const contactRoutes = require('./routes/contacts');
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -19,13 +20,16 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Serve static files (HTML, CSS, JS) from 'public' folder
 app.use(bodyParser.json());
+// Middleware
+app.use(express.json());
 
 app.use('/organizations', organizationRoutes);
 app.use('/leads', leadRoutes);
 app.use('/projects', projectRoutes);
-app.use('/teams', teamRoutes); // Fix typo here
+app.use('/teams', teamRoutes);
 app.use('/tickets', ticketRoutes);
-app.use('/users', userRoutes); // Use user routes
+app.use('/users', userRoutes);
+app.use('/contacts', contactRoutes); 
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI)
